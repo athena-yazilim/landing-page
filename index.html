@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Athena Yazılım — Landing page taslağı</title>
+<!-- Design mockup only (Phase 1). Copy is placeholder until the content agent delivers it. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #12203A; --navy-light: #1B2E52;
+    --bronze: #D9A441; --bronze-dark: #B8892E; --bronze-text: #8C6A23;
+    --text-secondary: #4A5568; --text-secondary-dark: #B8C2D3;
+    --white: #FFFFFF; --gray-50: #F3F4F6;
+    --font: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --max: 1120px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { font: 500 16px/26px var(--font); color: var(--navy); background: var(--white); }
+  a { color: inherit; }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  /* Header */
+  header { position: sticky; top: 0; z-index: 10; background: var(--white); }
+  .bar { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+  .logo svg { display: block; height: 40px; width: auto; }
+  nav ul { display: flex; gap: 32px; list-style: none; }
+  nav a { text-decoration: none; font: 700 14px/22px var(--font); color: var(--navy); }
+  nav a:hover { color: var(--bronze-text); }
+  .actions { display: flex; align-items: center; gap: 16px; }
+  .lang { display: inline-flex; border: 1px solid var(--navy); border-radius: 999px; overflow: hidden; }
+  .lang button { font: 700 12px/16px var(--font); letter-spacing: 0.1em; padding: 6px 12px; border: 0; background: transparent; color: var(--navy); cursor: pointer; }
+  .lang button[aria-pressed="false"]:hover { background: var(--gray-50); }
+  .lang button[aria-pressed="true"] { background: var(--navy); color: var(--white); }
+  .btn { display: inline-block; font: 700 16px/24px var(--font); text-decoration: none; padding: 12px 24px; border-radius: 8px; }
+  .btn-primary { background: var(--navy); color: var(--white); }
+  .btn-primary:hover { background: var(--navy-light); }
+  .btn-accent { background: var(--bronze); color: var(--navy); }
+  .btn-accent:hover { background: var(--bronze-dark); }
+  .btn-ghost { border: 1px solid var(--text-secondary-dark); color: var(--white); }
+  .btn-ghost:hover { background: var(--navy-light); }
+  .btn-sm { font-size: 14px; padding: 8px 16px; }
+  :focus-visible { outline: 3px solid var(--navy); outline-offset: 2px; }
+  .hero :focus-visible, .contact :focus-visible, footer :focus-visible { outline-color: var(--bronze); }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; background: var(--navy); color: var(--white); padding: 120px 0 128px; }
+  .hero .deco { position: absolute; pointer-events: none; }
+  .overline { font: 700 12px/16px var(--font); letter-spacing: 0.2em; text-transform: uppercase; }
+  .hero .overline { color: var(--bronze); }
+  .hero h1 { font: 800 48px/56px var(--font); letter-spacing: -0.01em; margin: 16px 0 24px; max-width: 14ch; }
+  .hero p { font-size: 18px; line-height: 28px; color: var(--text-secondary-dark); max-width: 60ch; }
+  .hero .cta { display: flex; gap: 16px; margin-top: 40px; flex-wrap: wrap; }
+
+  /* Sections */
+  section { padding: 96px 0; }
+  .alt { background: var(--gray-50); }
+  .sec-head { max-width: 640px; margin-bottom: 48px; }
+  .sec-head .overline { color: var(--bronze-text); }
+  h2 { font: 700 32px/40px var(--font); margin-top: 12px; }
+  .sec-head p { color: var(--text-secondary); margin-top: 16px; }
+  .grid { display: grid; gap: 24px; grid-template-columns: repeat(3, 1fr); }
+  .card { background: var(--gray-50); border-radius: 12px; padding: 32px; }
+  .alt .card { background: var(--white); }
+  .card .num { font: 800 20px/28px var(--font); color: var(--bronze-text); }
+  h3 { font: 700 20px/28px var(--font); margin: 16px 0 8px; }
+  .card p { color: var(--text-secondary); }
+  .steps { counter-reset: s; }
+  .steps .card { border-top: 3px solid var(--navy); }
+  .about { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .about p + p { margin-top: 16px; }
+  .about .body p { color: var(--text-secondary); }
+  .todo { display: inline-block; font: 700 12px/16px var(--font); color: var(--bronze-text); border: 1px dashed var(--bronze-dark); border-radius: 4px; padding: 2px 8px; margin-top: 16px; }
+
+  /* Contact */
+  .contact { background: var(--navy); color: var(--white); text-align: center; position: relative; overflow: hidden; }
+  .contact .overline { color: var(--bronze); }
+  .contact h2 { margin: 12px auto 16px; max-width: 20ch; }
+  .contact p { color: var(--text-secondary-dark); max-width: 56ch; margin: 0 auto; }
+  .contact .mail { display: inline-block; margin-top: 32px; font: 700 20px/28px var(--font); color: var(--bronze); text-decoration: none; }
+  .contact .mail:hover { text-decoration: underline; }
+  .contact .cta { margin-top: 24px; }
+
+  /* Footer */
+  footer { background: var(--navy-light); color: var(--text-secondary-dark); font-size: 14px; line-height: 22px; padding: 40px 0; }
+  .foot { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+  .foot svg { display: block; height: 36px; width: auto; }
+  .foot nav ul { gap: 8px 24px; flex-wrap: wrap; }
+  .foot nav a { color: var(--text-secondary-dark); font-weight: 500; }
+  .foot nav a:hover { color: var(--white); }
+
+  /* Mobile */
+  .menu-btn { display: none; background: none; border: 0; padding: 8px; cursor: pointer; }
+  .menu-btn span { display: block; width: 22px; height: 2px; background: var(--navy); margin: 5px 0; }
+  @media (max-width: 860px) {
+    .main-nav, .actions .btn { display: none; }
+    .menu-btn { display: block; }
+    .main-nav.open { display: block; position: absolute; top: 72px; left: 0; right: 0; background: var(--white); padding: 8px 24px 24px; }
+    .main-nav.open ul { flex-direction: column; gap: 0; }
+    .main-nav.open a { display: block; padding: 12px 0; font-size: 16px; }
+    .logo svg { height: 36px; }
+    .hero { padding: 72px 0 80px; }
+    .hero h1 { font-size: 40px; line-height: 48px; }
+    section { padding: 64px 0; }
+    .grid, .about { grid-template-columns: 1fr; }
+    .about { gap: 24px; }
+    .card { padding: 24px; }
+    .hero .cta .btn { width: 100%; text-align: center; }
+    .foot { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="Athena Yazılım"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219.81 64.00" role="img" aria-label="Athena Yazılım"><circle cx="32" cy="32" r="29" fill="#12203A"/><circle cx="32" cy="32" r="25" stroke="#D9A441" stroke-width="1.5" fill="none"/><circle cx="32" cy="32" r="21" stroke="#D9A441" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M23 38 L18 32 L23 26 M41 38 L46 32 L41 26" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M29 40 L35 24" stroke="#D9A441" stroke-width="3.5" stroke-linecap="round"/><path transform="translate(80.00 34.76)" fill="#12203A" d="M7.2 -23.04H13.696L20.736 0.0H16.256L10.4 -18.944L4.64 0.0H0.16ZM31.04 0.0V-18.976H23.776V-23.04H42.656V-18.976H35.391999999999996V0.0ZM47.776 0.0V-23.04H52.128V-13.568H62.432V-23.04H66.784V0.0H62.432V-9.504H52.128V0.0ZM73.824 0.0V-23.04H88.864V-18.976H78.176V-14.048H86.944V-9.984H78.176V-4.064H88.864V0.0ZM95.264 0.0V-23.04H99.68L109.696 -7.68V-23.04H114.112V0.0H109.696L99.68 -15.36V0.0ZM126.11200000000001 -23.04H132.608L139.648 0.0H135.168L129.312 -18.944L123.552 0.0H119.072Z"/><path transform="translate(80.00 52.28)" fill="#4A5568" d="M2.6675 0.0V-3.2944999999999998L0.0 -7.92H1.1384999999999998L3.1624999999999996 -4.4165L5.181 -7.92H6.3195L3.6574999999999998 -3.2944999999999998V0.0ZM11.1595 0.0 13.8105 -7.92H15.174499999999998L17.825499999999998 0.0H16.808L14.327499999999999 -7.348H14.635499999999999L12.177 0.0ZM12.4355 -1.8535V-2.772H16.5495V-1.8535ZM23.2155 0.0V-0.176L27.400999999999996 -6.9905H23.380499999999998V-7.92H29.051V-7.733L24.8875 -0.9295H28.996V0.0ZM35.101 0.0V-7.92H36.08V0.0ZM42.46 0.0V-7.92H43.439V-0.9295H47.113V0.0ZM52.778 0.0V-7.92H53.757V0.0ZM60.027 0.0V-7.92H60.918L63.91 -1.6115L66.8855 -7.92H67.7875V-0.0055H66.858V-5.7695L64.1685 0.0H63.646L60.9565 -5.7695V0.0Z"/></svg></a>
+    <nav class="main-nav" id="main-nav" aria-label="Ana menü" data-i18n-label="navMain">
+      <ul>
+        <li><a href="#services" data-i18n="navServices"></a></li>
+        <li><a href="#approach" data-i18n="navApproach"></a></li>
+        <li><a href="#about" data-i18n="navAbout"></a></li>
+        <li><a href="#contact" data-i18n="navContact"></a></li>
+      </ul>
+    </nav>
+    <div class="actions">
+      <div class="lang" role="group" aria-label="Language / Dil">
+        <button type="button" data-lang="tr" aria-pressed="true">TR</button>
+        <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+      <a class="btn btn-primary btn-sm" href="#contact" data-i18n="ctaHeader"></a>
+      <button class="menu-btn" type="button" aria-controls="main-nav" aria-expanded="false" data-i18n-label="menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <svg class="deco" width="640" height="640" viewBox="0 0 640 640" style="right:-200px;top:-220px" aria-hidden="true">
+      <circle cx="320" cy="320" r="300" stroke="#D9A441" stroke-opacity=".12" stroke-width="2" fill="none"/>
+      <circle cx="320" cy="320" r="250" stroke="#D9A441" stroke-opacity=".10" stroke-width="2" fill="none" stroke-dasharray="16 12"/>
+    </svg>
+    <svg class="deco" width="380" height="380" viewBox="0 0 380 380" style="left:-150px;bottom:-190px" aria-hidden="true">
+      <circle cx="190" cy="190" r="170" stroke="#D9A441" stroke-opacity=".10" stroke-width="2" fill="none"/>
+    </svg>
+    <div class="wrap" style="position:relative">
+      <p class="overline" data-i18n="heroOverline"></p>
+      <h1 data-i18n="tagline"></h1>
+      <p data-i18n="heroLead"></p>
+      <div class="cta">
+        <a class="btn btn-accent" href="#contact" data-i18n="ctaPrimary"></a>
+        <a class="btn btn-ghost" href="#services" data-i18n="ctaSecondary"></a>
+      </div>
+    </div>
+  </div>
+
+  <section id="services">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="overline" data-i18n="servicesOverline"></p>
+        <h2 data-i18n="servicesTitle"></h2>
+        <p data-i18n="servicesLead"></p>
+        <span class="todo">TODO: confirm service list (content agent, Phase 2)</span>
+      </div>
+      <div class="grid">
+        <article class="card"><div class="num">01</div><h3 data-i18n="s1Title"></h3><p data-i18n="s1Body"></p></article>
+        <article class="card"><div class="num">02</div><h3 data-i18n="s2Title"></h3><p data-i18n="s2Body"></p></article>
+        <article class="card"><div class="num">03</div><h3 data-i18n="s3Title"></h3><p data-i18n="s3Body"></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="approach" class="alt">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="overline" data-i18n="approachOverline"></p>
+        <h2 data-i18n="approachTitle"></h2>
+      </div>
+      <div class="grid steps">
+        <article class="card"><p class="overline" style="color:var(--bronze-text)" data-i18n="step1"></p><h3 data-i18n="a1Title"></h3><p data-i18n="a1Body"></p></article>
+        <article class="card"><p class="overline" style="color:var(--bronze-text)" data-i18n="step2"></p><h3 data-i18n="a2Title"></h3><p data-i18n="a2Body"></p></article>
+        <article class="card"><p class="overline" style="color:var(--bronze-text)" data-i18n="step3"></p><h3 data-i18n="a3Title"></h3><p data-i18n="a3Body"></p></article>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap about">
+      <div>
+        <p class="overline" style="color:var(--bronze-text)" data-i18n="aboutOverline"></p>
+        <h2 data-i18n="aboutTitle"></h2>
+      </div>
+      <div class="body">
+        <p data-i18n="aboutP1"></p>
+        <p data-i18n="aboutP2"></p>
+        <span class="todo">TODO: bio (founder or team), experience, references (content agent, Phase 2)</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <svg class="deco" width="420" height="420" viewBox="0 0 420 420" style="position:absolute;right:-160px;bottom:-200px" aria-hidden="true">
+      <circle cx="210" cy="210" r="190" stroke="#D9A441" stroke-opacity=".10" stroke-width="2" fill="none" stroke-dasharray="16 12"/>
+    </svg>
+    <div class="wrap" style="position:relative">
+      <p class="overline" data-i18n="contactOverline"></p>
+      <h2 data-i18n="contactTitle"></h2>
+      <p data-i18n="contactLead"></p>
+      <a class="mail" href="mailto:tariktekin@athenayazilim.com">tariktekin@athenayazilim.com</a>
+      <div class="cta"><a class="btn btn-accent" href="mailto:tariktekin@athenayazilim.com" data-i18n="ctaMail"></a></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 219.81 64.00" role="img" aria-label="Athena Yazılım"><circle cx="32" cy="32" r="29" fill="#D9A441"/><circle cx="32" cy="32" r="25" stroke="#12203A" stroke-width="1.5" fill="none"/><circle cx="32" cy="32" r="21" stroke="#12203A" stroke-width="1.5" fill="none" stroke-dasharray="4 3"/><path d="M23 38 L18 32 L23 26 M41 38 L46 32 L41 26" stroke="#12203A" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M29 40 L35 24" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round"/><path transform="translate(80.00 34.76)" fill="#FFFFFF" d="M7.2 -23.04H13.696L20.736 0.0H16.256L10.4 -18.944L4.64 0.0H0.16ZM31.04 0.0V-18.976H23.776V-23.04H42.656V-18.976H35.391999999999996V0.0ZM47.776 0.0V-23.04H52.128V-13.568H62.432V-23.04H66.784V0.0H62.432V-9.504H52.128V0.0ZM73.824 0.0V-23.04H88.864V-18.976H78.176V-14.048H86.944V-9.984H78.176V-4.064H88.864V0.0ZM95.264 0.0V-23.04H99.68L109.696 -7.68V-23.04H114.112V0.0H109.696L99.68 -15.36V0.0ZM126.11200000000001 -23.04H132.608L139.648 0.0H135.168L129.312 -18.944L123.552 0.0H119.072Z"/><path transform="translate(80.00 52.28)" fill="#B8C2D3" d="M2.6675 0.0V-3.2944999999999998L0.0 -7.92H1.1384999999999998L3.1624999999999996 -4.4165L5.181 -7.92H6.3195L3.6574999999999998 -3.2944999999999998V0.0ZM11.1595 0.0 13.8105 -7.92H15.174499999999998L17.825499999999998 0.0H16.808L14.327499999999999 -7.348H14.635499999999999L12.177 0.0ZM12.4355 -1.8535V-2.772H16.5495V-1.8535ZM23.2155 0.0V-0.176L27.400999999999996 -6.9905H23.380499999999998V-7.92H29.051V-7.733L24.8875 -0.9295H28.996V0.0ZM35.101 0.0V-7.92H36.08V0.0ZM42.46 0.0V-7.92H43.439V-0.9295H47.113V0.0ZM52.778 0.0V-7.92H53.757V0.0ZM60.027 0.0V-7.92H60.918L63.91 -1.6115L66.8855 -7.92H67.7875V-0.0055H66.858V-5.7695L64.1685 0.0H63.646L60.9565 -5.7695V0.0Z"/></svg>
+    <nav aria-label="Alt menü" data-i18n-label="navFooter">
+      <ul style="display:flex;list-style:none">
+        <li><a href="#services" data-i18n="navServices"></a></li>
+        <li><a href="#approach" data-i18n="navApproach"></a></li>
+        <li><a href="#about" data-i18n="navAbout"></a></li>
+        <li><a href="#contact" data-i18n="navContact"></a></li>
+      </ul>
+    </nav>
+    <p>© <span id="year"></span> Athena Yazılım · www.athenayazilim.com</p>
+  </div>
+</footer>
+
+<script>
+  // Placeholder copy. The content agent replaces it in Phase 2. Only the tagline is approved.
+  const COPY = {
+    tr: {
+      navServices: 'Hizmetler', navApproach: 'Yaklaşım', navAbout: 'Hakkımızda', navContact: 'İletişim',
+      ctaHeader: 'Görüşme planlayın', menu: 'Menü',
+      title: 'Athena Yazılım — Landing page taslağı', navMain: 'Ana menü', navFooter: 'Alt menü',
+      heroOverline: 'Yazılım danışmanlığı',
+      tagline: 'Sade mimari. Güvenilir yazılım.',
+      heroLead: 'Yazılım mimarinizi sade, ölçeklenebilir ve sürdürülebilir hale getiriyoruz. Buraya kısa bir tanıtım metni gelecek.',
+      ctaPrimary: 'Görüşme planlayın', ctaSecondary: 'Hizmetleri inceleyin',
+      servicesOverline: 'Hizmetler', servicesTitle: 'Neler yapıyoruz',
+      servicesLead: 'Hizmetler bölümü için kısa bir giriş metni.',
+      s1Title: 'Yazılım mimarisi', s1Body: 'Mimari hizmetini anlatan iki üç cümlelik örnek açıklama.',
+      s2Title: 'Uygulama geliştirme', s2Body: 'Geliştirme hizmetini anlatan iki üç cümlelik örnek açıklama.',
+      s3Title: 'Dijital dönüşüm', s3Body: 'Dönüşüm hizmetini anlatan iki üç cümlelik örnek açıklama.',
+      approachOverline: 'Yaklaşım', approachTitle: 'Nasıl çalışıyoruz',
+      step1: 'Adım 1', a1Title: 'Anlama', a1Body: 'İlk adımı anlatan kısa örnek açıklama.',
+      step2: 'Adım 2', a2Title: 'Tasarlama', a2Body: 'İkinci adımı anlatan kısa örnek açıklama.',
+      step3: 'Adım 3', a3Title: 'Hayata geçirme', a3Body: 'Üçüncü adımı anlatan kısa örnek açıklama.',
+      aboutOverline: 'Hakkımızda', aboutTitle: 'Athena Yazılım',
+      aboutP1: 'Şirketi tanıtan birinci paragraf için örnek metin.',
+      aboutP2: 'Deneyimi ve çalışma biçimini anlatan ikinci paragraf için örnek metin.',
+      contactOverline: 'İletişim', contactTitle: 'Projenizi konuşalım',
+      contactLead: 'İletişim bölümü için kısa bir davet metni.',
+      ctaMail: 'E-posta gönderin'
+    },
+    en: {
+      navServices: 'Services', navApproach: 'Approach', navAbout: 'About', navContact: 'Contact',
+      ctaHeader: 'Book a call', menu: 'Menu',
+      title: 'Athena Yazılım — Landing page mockup', navMain: 'Main menu', navFooter: 'Footer menu',
+      heroOverline: 'Software consultancy',
+      tagline: 'Clear architecture. Reliable software.',
+      heroLead: 'We design and build software that is simple to run and easy to grow. A short introduction goes here.',
+      ctaPrimary: 'Book a call', ctaSecondary: 'See our services',
+      servicesOverline: 'Services', servicesTitle: 'What we do',
+      servicesLead: 'A short introduction to the services section.',
+      s1Title: 'Software architecture', s1Body: 'A two or three sentence placeholder about the architecture service.',
+      s2Title: 'Application development', s2Body: 'A two or three sentence placeholder about the development service.',
+      s3Title: 'Digital transformation', s3Body: 'A two or three sentence placeholder about the transformation service.',
+      approachOverline: 'Approach', approachTitle: 'How we work',
+      step1: 'Step 1', a1Title: 'Understand', a1Body: 'A short placeholder about the first step.',
+      step2: 'Step 2', a2Title: 'Design', a2Body: 'A short placeholder about the second step.',
+      step3: 'Step 3', a3Title: 'Deliver', a3Body: 'A short placeholder about the third step.',
+      aboutOverline: 'About', aboutTitle: 'Athena Yazılım',
+      aboutP1: 'Placeholder for a first paragraph that introduces the company.',
+      aboutP2: 'Placeholder for a second paragraph about experience and how we work.',
+      contactOverline: 'Contact', contactTitle: 'Let’s talk about your project',
+      contactLead: 'A short invitation for the contact section.',
+      ctaMail: 'Send an email'
+    }
+  };
+  function setLang(lang) {
+    const t = COPY[lang];
+    document.documentElement.lang = lang;
+    document.title = t.title;
+    document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t[el.dataset.i18n]; });
+    document.querySelectorAll('[data-i18n-label]').forEach(el => el.setAttribute('aria-label', t[el.dataset.i18nLabel]));
+    document.querySelectorAll('.lang button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lang === lang)));
+  }
+  document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => setLang(b.dataset.lang)));
+  const menuBtn = document.querySelector('.menu-btn'), nav = document.getElementById('main-nav');
+  menuBtn.addEventListener('click', () => { const o = nav.classList.toggle('open'); menuBtn.setAttribute('aria-expanded', String(o)); });
+  nav.addEventListener('click', e => { if (e.target.tagName === 'A') { nav.classList.remove('open'); menuBtn.setAttribute('aria-expanded', 'false'); } });
+  document.getElementById('year').textContent = new Date().getFullYear();
+  setLang(location.hash === '#en' ? 'en' : 'tr');
+</script>
+</body>
+</html>
